@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fx.db.BaseDao;
 
-public class RegisterServlet extends HttpServlet {
+public class ModifyServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -20,24 +20,24 @@ public class RegisterServlet extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			this.doPost(request, response);
+		this.doPost(request, response);
 	}
 
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		Object[] obj = request.getParameterValues("arr");
-		String sql = "insert into info(name,sex,age,phoneNumber,post,section,pay,hiredate,share) values(?,?,?,?,?,?,?,?,?)";
-//		String[] obj = new String[]{"幸福一生dsfsfa","0","12","164846389473","Web软件工程师","研发部","9000","2014-4-5","0"}; 
- 		boolean flag = BaseDao.getDao().updataFunction(sql, obj);
- 		if(flag){
- 			out.print("{\"succeed\":\"yes\"}");
- 		}else{
- 			out.print("{\"succeed\":\"no\"}");
- 		}
+		Object arr = request.getParameterValues("arr");
+//		update info set name='何礼波w' , sex = 100 ,age = 11, phoneNumber = '15777728399' , post = '云架构' , section = '技术部' , pay = '9999' , hiredate = '1995-4-5' , share = '0.06%'  where userId = 1;
+		String sql = "update info set name=? , sex = ? ,age = ?, phoneNumber = ? , post = ? , section = ? , pay = ? , hiredate = ? , share = ?  where userId = ?" ; 
+		boolean flag = BaseDao.getDao().updataFunction(sql, arr) ;
+		if(flag){
+			out.print("{\"succeed\":\"yes\"}");
+		}else{
+			out.print("{\"succeed\":\"no\"}");
+		}
 		out.flush();
 		out.close();
 	}

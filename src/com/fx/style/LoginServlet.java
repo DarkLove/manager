@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		LoginBean bean = dao.isHave(name, password) ; 
 		if(bean != null){
 			String json = JSON.toJSONString(bean);
-			System.out.println(json);
+//			System.out.println(json);
 			out.print("{\"succeed\":\"yes\",\"bean\":"+json+"}");
 			HttpSession session = request.getSession() ;
 			session.setAttribute("userId", bean.getUserId());
